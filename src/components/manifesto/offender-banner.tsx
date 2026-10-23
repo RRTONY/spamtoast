@@ -1,14 +1,25 @@
 "use client";
 
-import { useState } from "react";
+import { Suspense, useState } from "react";
+import { useSearchParams } from "next/navigation";
 import { AlertTriangle } from "lucide-react";
 
 // Ported from legacy client/src/pages/manifesto/AttentionTheft.tsx's
 // `?offender=` deep-link banner (by way of tonygreenberg.com). The CTA points
-// at the Report section.
-export function OffenderBanner({ offender }: { offender: string }) {
+// at the Report section. Reads `?offender=` in the browser so the homepage
+// stays pre-built (static) instead of rendering per request.
+export function OffenderBanner() {
+  return (
+    <Suspense fallback={null}>
+      <Banner />
+    </Suspense>
+  );
+}
+
+function Banner() {
+  const offender = useSearchParams().get("offender");
   const [dismissed, setDismissed] = useState(false);
-  if (dismissed) return null;
+  if (!offender || dismissed) return null;
 
   return (
     <section className="relative overflow-hidden border-y-2 border-crusade-red bg-linear-to-r from-crusade-red/6 via-background to-crusade-red/6 px-5 py-8">

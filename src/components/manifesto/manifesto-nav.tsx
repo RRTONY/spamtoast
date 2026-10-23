@@ -9,7 +9,8 @@ import { Menu, X, ChevronLeft, Flame } from "lucide-react";
 // "port ManifestoLayout scroll-tracking wrapper behavior" instruction:
 // tracks which section is currently in view and highlights the matching
 // nav pill, both on desktop and in the mobile menu. Anchors are plain
-// `<a href="#id">` (not a JS scrollIntoView handler) so navigation works
+// `<a href="/#id">` (not a JS scrollIntoView handler; the leading slash
+// makes them work from /youve-been-reported too) so navigation works
 // with JS disabled; smooth scrolling comes from `scroll-smooth` on the
 // page's root instead. On spamtoast.com the brand links home and the back
 // arrow goes to tonygreenberg.com.
@@ -78,7 +79,7 @@ export function ManifestoNav() {
           {NAV_ITEMS.map((item) => (
             <a
               key={item.anchor}
-              href={item.anchor ? `#${item.anchor}` : "#"}
+              href={item.anchor ? `/#${item.anchor}` : "/"}
               className={`rounded-md px-3 py-1.5 text-sm font-medium whitespace-nowrap transition-all ${
                 activeAnchor === item.anchor
                   ? "bg-crusade-red text-white shadow-[0_0_15px_rgba(200,22,26,0.3)]"
@@ -97,7 +98,7 @@ export function ManifestoNav() {
             {NAV_ITEMS.map((item) => (
               <a
                 key={item.anchor}
-                href={item.anchor ? `#${item.anchor}` : "#"}
+                href={item.anchor ? `/#${item.anchor}` : "/"}
                 onClick={() => setMenuOpen(false)}
                 className={`rounded-md px-3 py-2.5 text-base font-medium ${
                   activeAnchor === item.anchor ? "bg-crusade-red text-white" : "text-crusade-ink"

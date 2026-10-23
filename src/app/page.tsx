@@ -68,10 +68,7 @@ function Divider({ src, alt, className = "h-48 md:h-72" }: { src: string; alt: s
   );
 }
 
-export default async function HomePage({ searchParams }: PageProps<"/">) {
-  const params = await searchParams;
-  const offenderRaw = params.offender;
-  const offender = Array.isArray(offenderRaw) ? offenderRaw[0] : offenderRaw;
+export default function HomePage() {
 
   return (
     <div>
@@ -118,7 +115,7 @@ export default async function HomePage({ searchParams }: PageProps<"/">) {
         </div>
       </section>
 
-      {offender && <OffenderBanner offender={offender} />}
+      <OffenderBanner />
 
       {/* The Sacred */}
       <Divider src={IMG.sacred} alt="Sacred cathedral interior with golden light" />
