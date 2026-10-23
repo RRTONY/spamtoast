@@ -19,10 +19,10 @@ pointing at Namecheap's default nameservers) doesn't serve it yet.
 - Wall of Shame: the first entries (Tony picks; it stays hidden while empty).
 
 **MCP server setup (2026-10-24):** env vars added to `.env.local.example`; a local `.env.local`
-was made with the same team emails and sender as psychedelicreadiness and fresh secrets. Still
-blank: `RESEND_API_KEY` (paste the same Resend key), `GITHUB_TOKEN` (needs the repo first),
-Netlify token. `get_project_rules` now serves this file's status block. Notes:
-`docs/ai/mcp-server.md`.
+was made with the same team emails and sender as psychedelicreadiness and fresh secrets. Resend
+key and GitHub token are in. Tested locally against the real repo: the read tools work; no test
+change made yet. Still blank: Netlify token. `get_project_rules` now serves this file's status block. Notes:
+`docs/ai/mcp-server.md`; gotchas: `docs/ai/gotchas.md`.
 
 **Next up:** the setup steps below, in order.
 
@@ -30,7 +30,8 @@ Netlify token. `get_project_rules` now serves this file's status block. Notes:
 
 ## Setup (outward-facing: each needs a yes)
 
-- [ ] Create the GitHub repo (`RRTONY/spamtoast`, private) and push `main`.
+- [x] Create the GitHub repo (`RRTONY/spamtoast`) and push `main` (done; it is **public**, the plan
+      said private: owner to confirm).
 - [ ] Netlify: new site from that repo, named `spamtoast` (build settings come from `netlify.toml`).
 - [ ] Netlify env vars: everything in `.env.local.example` (site, Resend, `CONFRONT_LINK_SECRET`,
       MCP server). Generate the secrets fresh (`openssl rand -base64 32`), never reuse

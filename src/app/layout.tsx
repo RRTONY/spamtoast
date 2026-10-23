@@ -7,7 +7,8 @@ import { pageFontVariables } from "@/lib/fonts/page-fonts";
 import "./globals.css";
 
 // Same fonts as tonygreenberg.com; every heading is Fraunces, as on its
-// /attention-theft section (font-heading points at it here).
+// /attention-theft section. The override sits on <body>: on <html> it clashes
+// with Playfair's own --font-display class and loses.
 const playfairDisplay = Playfair_Display({ variable: "--font-display", subsets: ["latin"] });
 const dmMono = DM_Mono({ variable: "--font-mono", weight: ["400", "500"], subsets: ["latin"] });
 const sourceSans3 = Source_Sans_3({ variable: "--font-body", subsets: ["latin"] });
@@ -50,9 +51,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`${playfairDisplay.variable} ${dmMono.variable} ${sourceSans3.variable} ${pageFontVariables} h-full scroll-smooth antialiased [--font-display:var(--font-fraunces-face),Georgia,serif]`}
+      className={`${playfairDisplay.variable} ${dmMono.variable} ${sourceSans3.variable} ${pageFontVariables} h-full scroll-smooth antialiased`}
     >
-      <body className="flex min-h-full flex-col text-crusade-ink" suppressHydrationWarning>
+      <body className="flex min-h-full flex-col text-crusade-ink [--font-display:var(--font-fraunces-face),Georgia,serif]" suppressHydrationWarning>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
         <ManifestoNav />
         <main className="flex-1">{children}</main>
