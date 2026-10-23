@@ -14,3 +14,7 @@
   curl is ignored as a bot, so curl checks are safe.
 - **`.env.local`'s `NEXT_PUBLIC_SITE_URL`** decides the canonical and sitemap host. Locally it may
   be `localhost`; on Netlify set it to `https://spamtoast.com`.
+- **Netlify publish directory is `.next`, set in `netlify.toml`.** A new Netlify site defaults
+  the publish directory to the repo root, and `@netlify/plugin-nextjs` fails with "Your publish
+  directory cannot be the same as the base directory of your site". The toml value wins over
+  the dashboard.

@@ -1,5 +1,8 @@
 [build]
   command = "pnpm install && pnpm build"
+  # Set here so the dashboard's publish directory (repo root by default on a
+  # new site) can't override it; the Next.js plugin refuses the repo root.
+  publish = ".next"
 
 [build.environment]
   NODE_VERSION = "22"
