@@ -24,7 +24,12 @@ key and GitHub token are in. Tested locally against the real repo: the read tool
 change made yet. Still blank: Netlify token. `get_project_rules` now serves this file's status block. Notes:
 `docs/ai/mcp-server.md`; gotchas: `docs/ai/gotchas.md`.
 
-**Next up:** the setup steps below, in order.
+**Netlify (2026-10-24):** live at https://harmonious-fox-9e4baf.netlify.app (site
+`harmonious-fox-9e4baf`, linked to `RRTONY/spamtoast` main). All env vars set through the API;
+`NEXT_PUBLIC_SITE_URL` is the Netlify address until DNS, then change it to https://spamtoast.com
+and redeploy. MCP server tested live (sign-in page, 26 tools, rules, check_deploy).
+
+**Next up:** DNS, then the remaining setup steps below.
 
 ---
 
@@ -32,8 +37,8 @@ change made yet. Still blank: Netlify token. `get_project_rules` now serves this
 
 - [x] Create the GitHub repo (`RRTONY/spamtoast`) and push `main` (done; it is **public**, the plan
       said private: owner to confirm).
-- [ ] Netlify: new site from that repo, named `spamtoast` (build settings come from `netlify.toml`).
-- [ ] Netlify env vars: everything in `.env.local.example` (site, Resend, `CONFRONT_LINK_SECRET`,
+- [x] Netlify: new site from that repo (named `harmonious-fox-9e4baf`, not `spamtoast`) (build settings come from `netlify.toml`).
+- [x] Netlify env vars: everything in `.env.local.example` (site, Resend, `CONFRONT_LINK_SECRET`,
       MCP server). Generate the secrets fresh (`openssl rand -base64 32`), never reuse
       tonygreenberg.com's.
 - [ ] DNS at Namecheap: add spamtoast.com and www as custom domains in Netlify, then either switch

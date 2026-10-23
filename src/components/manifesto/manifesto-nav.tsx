@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { Menu, X, ChevronLeft, Flame } from "lucide-react";
+import { Menu, X, Flame } from "lucide-react";
 
 // Ported from legacy client/src/pages/manifesto/ManifestoLayout.tsx's
 // sticky nav — real behavior kept per the migration todo's explicit
@@ -12,8 +12,8 @@ import { Menu, X, ChevronLeft, Flame } from "lucide-react";
 // `<a href="/#id">` (not a JS scrollIntoView handler; the leading slash
 // makes them work from /youve-been-reported too) so navigation works
 // with JS disabled; smooth scrolling comes from `scroll-smooth` on the
-// page's root instead. On spamtoast.com the brand links home and the back
-// arrow goes to tonygreenberg.com.
+// page's root instead. On spamtoast.com the brand links home; the only link
+// back to tonygreenberg.com is at the bottom of the mobile menu.
 const NAV_ITEMS = [
   { anchor: "", label: "The Manifesto", short: "Home" },
   { anchor: "heresy", label: "Economics of Theft", short: "Economics" },
@@ -53,11 +53,6 @@ export function ManifestoNav() {
       className={`sticky top-0 z-50 border-b border-crusade-red/10 bg-background/90 backdrop-blur-xl transition-shadow duration-300 ${scrolled ? "shadow-[0_2px_20px_rgba(0,0,0,0.06)]" : ""}`}
     >
       <div className="mx-auto flex h-14 max-w-7xl items-center justify-between px-5">
-        <a href="https://tonygreenberg.com" aria-label="Back to TonyGreenberg.com" className="flex items-center gap-1.5 text-sm font-medium text-crusade-muted hover:text-crusade-ink min-h-11 md:min-h-6">
-          <ChevronLeft size={16} />
-          <span className="hidden sm:inline">TonyG</span>
-        </a>
-
         <Link href="/" className="group flex items-center gap-2 min-h-11 md:min-h-6">
           <Flame size={22} className="text-crusade-red transition-transform group-hover:scale-110" />
           <span className="font-heading text-base font-bold tracking-[0.15em] text-crusade-ink uppercase">

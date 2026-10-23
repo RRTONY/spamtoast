@@ -12,9 +12,10 @@ function section(id: string, top: number) {
 }
 
 describe("ManifestoNav", () => {
-  it("links back home and to the manifesto, with in-page anchors", () => {
+  it("links home and to the manifesto, with in-page anchors", () => {
     render(<ManifestoNav />);
-    expect(screen.getByRole("link", { name: "Back to TonyGreenberg.com" })).toHaveAttribute("href", "https://tonygreenberg.com");
+    // No back-to-TonyG link in the top bar; the mobile menu has the only one.
+    expect(screen.queryByRole("link", { name: /TonyGreenberg/ })).not.toBeInTheDocument();
     expect(screen.getByRole("link", { name: /SpamToast/ })).toHaveAttribute("href", "/");
     expect(screen.getByRole("link", { name: "Legal" })).toHaveAttribute("href", "/#legal");
     expect(screen.getByRole("link", { name: "Home" })).toHaveAttribute("href", "/");
@@ -26,6 +27,7 @@ describe("ManifestoNav", () => {
     await userEvent.click(screen.getByRole("button", { name: "Toggle navigation" }));
     const link = screen.getByRole("link", { name: "Legal Arsenal" });
     expect(link).toHaveAttribute("href", "/#legal");
+    expect(screen.getByRole("link", { name: "Back to TonyGreenberg.com" })).toHaveAttribute("href", "https://tonygreenberg.com");
     await userEvent.click(link);
     expect(screen.queryByRole("link", { name: "Legal Arsenal" })).not.toBeInTheDocument();
   });
