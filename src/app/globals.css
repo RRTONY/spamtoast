@@ -1,0 +1,130 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-body);
+  --font-mono: var(--font-mono);
+  --font-heading: var(--font-display);
+  --color-brand-gold: var(--brand-gold);
+  --color-brand-gold-light: var(--brand-gold-light);
+  --font-fraunces: var(--font-fraunces-face), var(--font-display), serif;
+  --font-grotesk: var(--font-space-grotesk), var(--font-body), sans-serif;
+  --font-cormorant: var(--font-cormorant-face), var(--font-display), Georgia, serif;
+  --color-crusade-red: var(--crusade-red);
+  --color-crusade-crimson: var(--crusade-crimson);
+  --color-crusade-ink: var(--crusade-ink);
+  --color-crusade-brown: var(--crusade-brown);
+  --color-crusade-muted: var(--crusade-muted);
+  --color-crusade-teal: var(--crusade-teal);
+  --color-crusade-ember: var(--crusade-ember);
+  --color-crusade-sand: var(--crusade-sand);
+  --color-crusade-warm-white: var(--crusade-warm-white);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+}
+
+:root {
+  /* Brand constants — same value in both themes (legacy Layout.tsx used
+     these as theme-independent hover/active colors, not derived tokens).
+     Gold is #836311, a hair darker than legacy's #8b6914: legacy's value was
+     4.3–4.4:1 on the cream backgrounds, just under WCAG AA's 4.5:1 for the
+     small mono labels it's used for everywhere (2026-09-29 axe audit). On
+     the near-black sections use brand-gold-light instead. */
+  --brand-gold: #836311;
+  --brand-gold-light: #d4b96a;
+
+  /* spamtoast.com's "crusade" accent palette — a deliberate one-off
+     sub-brand identity carried over from tonygreenberg.com/attention-theft.
+     The site has no dark mode. */
+  --crusade-red: #c8161a;
+  --crusade-crimson: #a01015;
+  --crusade-ink: #1a1a1a;
+  --crusade-brown: #2c2418;
+  --crusade-muted: #6b6358;
+  --crusade-teal: #0d7373; /* legacy #0e7c7c was 4.3:1 on its own tinted badges (2026-09-30) */
+  --crusade-ember: #d4850a;
+  --crusade-sand: #ede9e0;
+  --crusade-warm-white: #f5f3ee;
+
+  --background: #fafaf7;
+  --foreground: #111111;
+  --card: #ffffff;
+  --card-foreground: #111111;
+  --popover: #ffffff;
+  --popover-foreground: #111111;
+  --primary: #c8161a;
+  --primary-foreground: #ffffff;
+  --secondary: #ede9e0;
+  --secondary-foreground: #111111;
+  --muted: #ede9e0;
+  --muted-foreground: #555555;
+  --accent: #f5f3ee;
+  --accent-foreground: #111111;
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: rgba(0, 0, 0, 0.1);
+  --input: rgba(0, 0, 0, 0.1);
+  --ring: #c8161a;
+  --radius: 0.625rem;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  html {
+    @apply font-sans;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-heading;
+  }
+}
+
+/* iPhone Safari zooms the whole page when a form field under 16px is tapped
+   (2026-09-30 WebKit/iPhone pass found 8 pages). On phone widths, lift the
+   fields that carry a small text utility to 16px; tablet and up keep their
+   designed size. Inside @layer utilities (see docs/ai/feedback_css_layer_bug.md);
+   the :is(input:not(...)) argument gives it more specificity than a single
+   .text-sm, so it wins within the layer. Fields sized 16px+ never match. */
+@layer utilities {
+  @media (max-width: 767.98px) {
+    :is(input:not([type="checkbox"]):not([type="radio"]):not([type="range"]), select, textarea):is(
+        .text-xs,
+        .text-sm,
+        [class*="text-[0."],
+        [class*="text-[11px]"],
+        [class*="text-[12px]"],
+        [class*="text-[13px]"],
+        [class*="text-[14px]"],
+        [class*="text-[15px]"]
+      ) {
+      font-size: 16px;
+    }
+  }
+}

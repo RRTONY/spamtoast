@@ -1,0 +1,13 @@
+[build]
+  command = "pnpm install && pnpm build"
+
+[build.environment]
+  NODE_VERSION = "22"
+  # Next's build cache (never published) can hold copies of server-only env
+  # values, which made Netlify's secret scanner fail the build on
+  # a server-only value (seen on tonygreenberg.com, 2026-10-07). The code and the published output are
+  # still scanned.
+  SECRETS_SCAN_OMIT_PATHS = ".netlify/.next/cache/**,.next/cache/**"
+
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
